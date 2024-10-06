@@ -1,0 +1,101 @@
+
+.carousel {
+    position: absolute;
+  
+    &__scroller {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 100%;  // Fiecare item ocupă o coloană completă
+        overflow-x: hidden;
+        width: 100vw;  // Asigură că caruselul nu depășește lățimea paginii
+      }
+  
+    &__group {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+  
+    &__item {
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      align-items: center;
+      text-align: center;
+      padding-left: 200px;
+      padding-right: 200px;
+      flex-basis: 100%;
+      margin: 0 0.25rem;
+      min-height: 6rem;
+      color: white;
+  font-size: x-large;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+      @for $i from 1 to 4 {
+        &:nth-child(#{$i}) {
+          background-color: black;
+        }
+      }
+    }
+
+    @media (max-width: 900px) {
+      &__item{
+        padding-left: 50px;
+      padding-right: 50px;
+      font-size: 1em;
+      min-height: 4rem;
+      }
+      
+    }
+  
+    &__btn-container {
+      background: hsla(0, 0%, 8%, 0.3);
+      width: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      z-index: 1;
+  
+      &--next {
+        top: 0;
+        bottom: 0;
+        right: 0;
+      }
+  
+      &--previous {
+        left: 0;
+        top: 0;
+        bottom: 0;
+      }
+    }
+  
+    &__btn {
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      width: 1.25rem;
+      height: 1.25rem;
+      background-color: white;
+  
+      &:hover {
+        opacity: 0.8;
+      }
+  
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
+  
+      &:disabled,
+      &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+  section{
+    min-width: 100vw;
+  }
+ 

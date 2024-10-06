@@ -1,0 +1,194 @@
+<div class="landing-content">
+
+  <div class="flex h-screen">
+    <!-- Container pentru formular și lista de cărți -->
+    <div class="books">
+      <!-- Container pentru formularul de adăugare a cărților -->
+      <div class="form-container">
+        <!-- Button to toggle form visibility -->
+        <button (click)="toggleForm()" class="add-btn px-2 py-2 rounded-sm w-full mb-2">
+          {{ showForm ? 'Hide Form' : 'Add Book' }}
+        </button>
+
+        <!-- Form for adding a book -->
+        <div *ngIf="showForm">
+          <form (ngSubmit)="onFormSubmit()" [formGroup]="booksForm" class="px-4">
+            <!-- Title Field -->
+            <div class="mt-2 fields">
+              <label for="title" class="font-bold text-white">Title</label>
+              <input type="text" id="title" class="w-full p-2 border-2 rounded-sm mt-2" formControlName="title">
+              <!-- Validation Error for Title -->
+              <div *ngIf="booksForm.get('title')?.touched && booksForm.get('title')?.invalid">
+                <div *ngIf="booksForm.get('title')?.errors?.['required']" class="text-red-500">
+                  Title is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- Author Field -->
+            <div class="mt-2 fields">
+              <label for="author" class="font-bold text-white">Author</label>
+              <input type="text" id="author" class="w-full p-2 border-2 rounded-sm mt-2" formControlName="author">
+              <!-- Validation Error for Author -->
+              <div *ngIf="booksForm.get('author')?.touched && booksForm.get('author')?.invalid">
+                <div *ngIf="booksForm.get('author')?.errors?.['required']" class="text-red-500">
+                  Author is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- ISBN Field -->
+            <div class="mt-2 fields">
+              <label for="isbn" class="font-bold text-white">ISBN</label>
+              <input type="text" id="isbn" class="w-full p-2 border-2 rounded-sm mt-2" formControlName="isbn">
+              <!-- Validation Error for ISBN -->
+              <div *ngIf="booksForm.get('isbn')?.touched && booksForm.get('isbn')?.invalid">
+                <div *ngIf="booksForm.get('isbn')?.errors?.['required']" class="text-red-500">
+                  ISBN is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- Published Date Field -->
+            <div class="mt-2 fields">
+              <label for="publishedYear" class="font-bold text-white">Published Date</label>
+              <input type="text" id="publishedYear" class="w-full p-2 border-2 rounded-sm mt-2"
+                formControlName="publishedYear" placeholder="Enter year (e.g., 2024)">
+              <!-- Validation Error for Published Date -->
+              <div *ngIf="booksForm.get('publishedYear')?.touched && booksForm.get('publishedYear')?.invalid">
+                <div *ngIf="booksForm.get('publishedYear')?.errors?.['required']" class="text-red-500">
+                  Published Date is required.
+                </div>
+                <div *ngIf="booksForm.get('publishedYear')?.errors?.['pattern']" class="text-red-500">
+                  Please enter a valid year (e.g., 2024).
+                </div>
+              </div>
+            </div>
+
+            <!-- Number of Pages Field -->
+            <div class="mt-2 fields">
+              <label for="numberOfPages" class="font-bold text-white">Nr. of pages</label>
+              <input type="number" id="numberOfPages" class="w-full p-2 border-2 rounded-sm mt-2"
+                formControlName="numberOfPages">
+              <!-- Validation Error for Number of Pages -->
+              <div *ngIf="booksForm.get('numberOfPages')?.touched && booksForm.get('numberOfPages')?.invalid">
+                <div *ngIf="booksForm.get('numberOfPages')?.errors?.['required']" class="text-red-500">
+                  Number of Pages is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- Image Field -->
+            <div class="mt-2 fields">
+              <label for="image" class="font-bold text-white">Image</label>
+              <input type="file" id="image" class="w-full p-2 border-2 rounded-sm mt-2" (change)="onFileChange($event)">
+              <img *ngIf="previewImage" [src]="previewImage" alt="Preview" class="mt-2 preview">
+            </div>
+
+            <!-- Genre field -->
+            <div class="mt-2 fields">
+              <label for="genre" class="font-bold text-white">Genre</label>
+              <select id="genre" class="w-full p-2 border-2 rounded-sm mt-2" formControlName="genre">
+                <option *ngFor="let genre of genres" [value]="genre">{{genre}}</option>
+              </select>
+              <div *ngIf="booksForm.get('genre')?.touched && booksForm.get('genre')?.invalid">
+                <div *ngIf="booksForm.get('genre')?.errors?.['required']" class="text-red-500">
+                  Genre is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- Status Field -->
+            <div class="mt-2 fields">
+              <label for="status" class="font-bold text-white">Status: </label>
+              <select id="status" formControlName="status">
+                <option *ngFor="let status of statuses" [value]="status">{{status}}</option>
+              </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-2 fields">
+              <button type="submit" class="add-btn px-4 py-2 rounded-sm w-full">Add book</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Container pentru lista de cărți -->
+<div class="book-content">
+  <div class="flex h-screen">
+
+    <div class="book-list-container">
+      <!-- Book List -->
+      <ng-container *ngIf="filteredBooks$ | async as books">
+        <ng-container *ngIf="books.length > 0;">
+
+
+          <ul class="book-list">
+            <li *ngFor="let item of books" class="book-item">
+              <figure>
+                <img *ngIf="item.image; else defaultImage" [src]="item.image" alt="Book Image" class="book-image" />
+                <ng-template #defaultImage>
+                  <img src="../../../public/img/default.jpg" alt="Default Book Image" class="book-image" />
+                </ng-template>
+                <figcaption>
+                  <div class="font-light text-xl fig">
+                    <strong>Title:</strong> {{ item.title }}
+                  </div>
+                  <div class="font-light text-xl fig">
+                    <strong>Author:</strong> {{ item.author }}
+                  </div>
+                  <div class="hyperlinks">
+                    <a href="#" (click)="openDetails(item)" class="details">Details</a>
+                    <a href="#" (click)="onDelete(item.id)" class="details">Delete</a>
+                  </div>
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
+          
+          <!-- Include the book-details-modal and pass the selected book -->
+          <app-book-details-modal *ngIf="selectedBook" [book]="selectedBook"></app-book-details-modal>
+        </ng-container>
+
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Search field -->
+<div class="book-count">
+  <p>
+    Nr. of books: {{ bookCount }}
+  </p>
+</div>
+<div class="accordion">
+  <button (click)="toggleAccordion()" class="accordion-header border border-slate-100 rounded-lg w-full ">
+    Search Options
+    <p *ngIf="isAccordionOpen">▲</p>
+    <p *ngIf="!isAccordionOpen">▼</p>
+  </button>
+
+  <div *ngIf="isAccordionOpen" class="accordion-content p-2 border border-slate-300 rounded-lg w-full mb-2">
+    <input type="text" [(ngModel)]="searchTitle" (ngModelChange)="onSearchTermChange()" placeholder="Search by title..." class="p-2 border border-slate-300 rounded-lg w-full mb-2">
+
+    <input type="text" [(ngModel)]="searchAuthor" (ngModelChange)="onSearchTermChange()" placeholder="Search by author..." class="p-2 border border-slate-300 rounded-lg w-full mb-2">
+
+    <input type="text" [(ngModel)]="searchPublishedYear" (ngModelChange)="onSearchTermChange()" placeholder="Search by year..." class="p-2 border border-slate-300 rounded-lg w-full mb-2">
+
+    <select [(ngModel)]="searchCategory" (ngModelChange)="onSearchTermChange()" class="p-2 border border-slate-300 rounded-lg w-full mb-2">
+      <option value="">All categories</option>
+      <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+    </select>
+
+      <!-- New Select for Status -->
+   <!-- Status dropdown -->
+<select [(ngModel)]="searchStatus" (ngModelChange)="onSearchTermChange()" class="p-2 border border-slate-300 rounded-lg w-full mb-2">
+  <option value="">All statuses</option>
+  <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+</select>
+  </div>
+</div>

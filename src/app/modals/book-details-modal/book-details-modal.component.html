@@ -1,0 +1,22 @@
+<div class="modal" *ngIf="book">
+    <div class="modal-content">
+        <div class="close-btn" (click)="book = null">&times;</div>
+        <h2>{{ book.title || 'No Title Available' }}</h2>
+        <img *ngIf="book.image; else defaultImage" [src]="book.image" alt="{{ book.title || 'Book Image' }}" class="book-image" width="120px"/>
+        <ng-template #defaultImage>
+            <img src="../../../public/img/default.jpg" alt="Default Book Image" class="book-image" />
+        </ng-template>
+        <br>
+        <p><strong>Author:</strong> {{ book.author || 'Not Available' }}</p>
+        <p><strong>Genre:</strong> {{ getGenre(book.genre) || 'Not Available' }}</p> 
+        <p><strong>ISBN:</strong> {{ book.isbn || 'Not Available' }}</p>
+        <p><strong>Published year:</strong> {{ book.publishedYear || 'Not Available' }}</p>
+        <p><strong>Nr. of pages:</strong> {{ book.numberOfPages !== null ? book.numberOfPages : 'Not Available' }}</p>
+        <p><strong>Status:</strong> {{ getStatusString(book.status) || 'Not Available' }}</p>
+        <div class="edit">
+            <button (click)="edit()" class="add-btn px-2 py-2 rounded-sm w-full mb-2 buttons">
+                Edit
+            </button>
+        </div>
+    </div>
+</div>

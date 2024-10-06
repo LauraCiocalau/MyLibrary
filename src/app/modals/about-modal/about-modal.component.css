@@ -1,0 +1,45 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  z-index: 9999;
+  position:fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  max-height: 100vh; /* Se ajustează înălțimea în funcție de conținut */
+  background-color: rgba(0, 0, 0, 0.9);
+overflow: hidden;
+}
+
+.modal-content {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 4px;
+  width: 40%;
+  height: fit-content;
+  max-height: 87vh; /* Limitează înălțimea pentru a nu depăși ecranul */
+  overflow-y: auto; /* Activează scroll doar pe conținutul modalului */
+  color: rgb(233, 227, 227);
+}
+
+@media (max-width: 600px){
+  .modal{
+    top: 120px;
+    padding-top: 30px;
+    max-width: 70vh;
+  }
+  .modal-content{
+    width: 80%;
+    max-width: 60vh;
+  }
+}
+  
+  .close-btn {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .close-btn:hover{
+    color: blue;
+  }

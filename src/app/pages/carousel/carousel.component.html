@@ -1,0 +1,30 @@
+<ng-container *ngIf="itemKeys && itemMap.size > 0">
+    <!-- Butonul Prev -->
+    <div class="carousel__btn-container carousel__btn-container--previous"
+         [ngClass]="{'carousel__btn-container--disabled': isPrevDisabled}">
+        <button class="carousel__btn carousel__btn--previous" [disabled]="isPrevDisabled" (click)="navToPrev()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-width="2" d="M15 6l-6 6 6 6" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Zona pentru grupurile de item-uri -->
+    <div class="carousel__scroller">
+        <ng-container *ngIf="itemMap.has(currentGroupIndex)">
+            <ng-container *ngFor="let item of itemMap.get(currentGroupIndex)">
+                <div class="carousel__item">{{ item }}</div>
+            </ng-container>
+        </ng-container>
+    </div>
+
+    <!-- Butonul Next -->
+    <div class="carousel__btn-container carousel__btn-container--next"
+         [ngClass]="{'carousel__btn-container--disabled': isNextDisabled}">
+        <button class="carousel__btn carousel__btn--next" [disabled]="isNextDisabled" (click)="navToNext()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-width="2" d="M9 6l6 6-6 6" />
+            </svg>
+        </button>
+    </div>
+</ng-container>
