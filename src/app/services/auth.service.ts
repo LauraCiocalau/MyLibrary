@@ -5,12 +5,13 @@ import { LoginRequest } from '../models/login.model';
 import { RegisterRequest } from '../models/register.model';
 import { UserProfile } from '../models/user.model';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://mylibrary20240927025704.azurewebsites.net/api';
+  private baseUrl = environment.apiUrl;
   private headers = new HttpHeaders({
     'Content-Type': 'application/json'
   });
@@ -22,18 +23,18 @@ export class AuthService {
   }
 
   getUserId(): Observable<{ userId: string }> {
-    return this.http.get<{ userId: string }>(`${this.apiUrl}/User/GetUserId`, { headers: this.getAuthHeaders() }); // Ensure headers are used
+    return this.http.get<{ userId: string }>(`${this.baseUrl}/User/GetUserId`, { headers: this.getAuthHeaders() }); // Ensure headers are used
   }
 
   getUserDetails(): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.apiUrl}/User/details`, { headers: this.getAuthHeaders() }).pipe(
+    return this.http.get<UserProfile>(`${this.baseUrl}/User/details`, { headers: this.getAuthHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
 
   // User login
   onLogin(request: LoginRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Account/login`, request, { headers: this.headers }).pipe(
+    return this.http.post<any>(`${this.baseUrl}/Account/login`, request, { headers: this.headers }).pipe(
       tap(response => {
         if (response.token) {
           const storage = request.rememberMe ? localStorage : sessionStorage;
@@ -46,7 +47,7 @@ export class AuthService {
 
   // User registration
   register(request: RegisterRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Account/register`, request, { headers: this.headers }).pipe(
+    return this.http.post<any>(`${this.baseUrl}/Account/register`, request, { headers: this.headers }).pipe(
       tap(response => {
         if (response.token) {
           localStorage.setItem('token', response.token); // Store token
@@ -58,26 +59,26 @@ export class AuthService {
 
   // Fetching user's books
   getMyBooks(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/Account/MyBooks`, { headers: this.getAuthHeaders() })
+    return this.http.get<any[]>(`${this.baseUrl}/Account/MyBooks`, { headers: this.getAuthHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   // Validating token
   validateToken(token: string): Observable<{ valid: boolean }> {
     const body = { token };
-    return this.http.post<{ valid: boolean }>(`${this.apiUrl}/Account/validate-token`, body, { headers: this.getAuthHeaders() })
+    return this.http.post<{ valid: boolean }>(`${this.baseUrl}/Account/validate-token`, body, { headers: this.getAuthHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   // Password reset
   forgotPassword(email: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/ResetPassword/forgot-password`, { email }, { headers: this.headers })
+    return this.http.post<any>(`${this.baseUrl}/ResetPassword/forgot-password`, { email }, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   // Deleting user account
   deleteUser(): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/User/delete`, { headers: this.getAuthHeaders() })
+    return this.http.delete<void>(`${this.baseUrl}/User/delete`, { headers: this.getAuthHeaders() })
       .pipe(catchError(this.handleError));
   }
 

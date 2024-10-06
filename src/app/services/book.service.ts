@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Book } from '../models/book.model'; // Importă modelul Book
 import { BookUpdate } from '../models/book-update';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private apiUrl = 'https://mylibrary20240927025704.azurewebsites.net/api/Library'; // URL-ul API-ului .NET
+  private apiUrl = environment.apiUrl + '/Library';
 
   constructor(private http: HttpClient) { }
 

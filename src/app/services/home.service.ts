@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Book } from '../models/book.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
-  private apiUrl = 'https://mylibrary20240927025704.azurewebsites.net/api/Library';
+  private apiUrl = environment.apiUrl + '/Library';
 
   constructor(private http: HttpClient) {}
 
