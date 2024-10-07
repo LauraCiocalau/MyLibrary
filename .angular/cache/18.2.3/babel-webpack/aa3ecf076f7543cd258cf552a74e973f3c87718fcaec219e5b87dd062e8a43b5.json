@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const environment = {\n  production: true,\n  apiUrl: 'https://mylibrary20240927025704.azurewebsites.net/api'\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
