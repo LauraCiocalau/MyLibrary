@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: 'MyLibrary20240927025704'
           slot-name: 'Production'
-          package: .
+          package: ${{ github.workspace }}/myapp
           
