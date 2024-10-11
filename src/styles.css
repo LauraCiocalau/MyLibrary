@@ -61,7 +61,6 @@ margin-right: 20px;
 .section {
   position: relative;
   width: 100vw;
- 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,6 +86,7 @@ margin-right: 20px;
 }
 .section span {
   position: relative;
+  top: 6.5vh;
   display: block;
   width: calc(6.25vw - 2px);
   height: calc(6.25vw - 2px);
@@ -98,7 +98,6 @@ margin-right: 20px;
   background: #0ef;
   transition: 0s;
 }
-
 
 footer{
 position: relative;

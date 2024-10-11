@@ -7,13 +7,14 @@ import { RegisterRequest } from '../../models/register.model';
 import { LoginRequest } from '../../models/login.model';
 import { HomeService } from '../../services/home.service';
 import { CarouselComponent } from '../carousel/carousel.component';
+import { BackgroundImageComponent } from '../background-image/background-image.component';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css'],
-  imports: [ReactiveFormsModule, CommonModule, RouterOutlet, RouterModule, CarouselComponent]
+  imports: [ReactiveFormsModule, CommonModule, RouterOutlet, RouterModule, CarouselComponent, BackgroundImageComponent]
 })
 export class LandingPageComponent implements AfterViewInit {
 

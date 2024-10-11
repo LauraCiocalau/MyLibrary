@@ -1,0 +1,12 @@
+.bookshelf {
+    position: absolute;
+    z-index: 1; /* Setează z-index pentru a fi în spatele altor elemente */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh; /* Setează pentru a acoperi întregul ecran */
+    background-image: url("../../../../public/img/bookshelf.jpg");
+    background-size: cover; /* Asigură-te că imaginea acoperă întreaga zonă */
+    background-repeat: no-repeat;
+    background-position: center; /* Centrează imaginea */
+  }
