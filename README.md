@@ -1,32 +1,41 @@
 MyLibrary Application Overview
 
-Features The MyLibrary application is a .NET-based backend service combined with an Angular-based frontend, designed for managing a personal library of books. It allows users to register, log in, and manage their book collections. Key functionalities include:
+Features
 
-User Account Management:
+The MyLibrary application is a .NET-based backend service combined with an Angular-based frontend, designed for managing a personal library of books. It allows users to register, log in, and manage their book collections. Key functionalities include:
+
+User Account Management
 
 Registration: Users can create accounts without email confirmation, ensuring a seamless onboarding experience. Login: Secure authentication using JWT tokens, which are generated upon successful login and can be validated for session management. Account Deletion: Users can delete their accounts securely.
 
-Book Management:
+Book Management
 
 Add Book: Users can add new books to their library, including metadata such as title, author, ISBN, published year, genre, and status. Users can also upload book cover images with validation for file type and size. Retrieve Books: Users can view their entire collection of books, filtered by their user ID. Update Book: Users can modify existing book entries while retaining current information. Delete Book: Users can remove books from their collection.
 
-User Profile Management:
+User Profile Management
 
 Get User Details: Users can access their profile information: username and email.
 
-Security Features:
+Security Features
 
 Utilizes ASP.NET Core Identity for robust user authentication and authorization. Implements logging for tracking user activities and debugging. Ensures secure handling of JWT tokens for authenticated routes.
 
-Structure Controllers: The application includes various controllers:
+Structure Controllers 
 
-AccountController: Handles user login, registration, and token validation. UserController: Manages user account details and deletion. LibraryController: Facilitates book operations, including adding, retrieving, and deleting books.
+The application includes various controllers
+AccountController: Handles user login, registration, and token validation. 
+UserController: Manages user account details and deletion. 
+LibraryController: Facilitates book operations, including adding, retrieving, and deleting books.
 
-Models: The application uses models such as:
+Models 
 
-ApplicationUser: Extends IdentityUser to represent users in the application. Book: Represents a book in the user's library with properties like title, author, ISBN, and cover image.
+The application uses models such as:
+ApplicationUser: Extends IdentityUser to represent users in the application. 
+Book: Represents a book in the user's library with properties like title, author, ISBN, and cover image.
 
-Services: Utilizes services for user management and database operations, ensuring separation of concerns and maintainability.
+Services
+
+Utilizes services for user management and database operations, ensuring separation of concerns and maintainability.
 
 Pages Landing Page (LandingPageComponent)
 
@@ -48,5 +57,6 @@ Component Interaction
 
 The Landing Page is linked to authentication functionalities via AuthService, allowing users to register and log in. The Reset Password Page interacts with the Forgot Password Page by allowing users to request a reset link and then reset their password using the link received via email. The Edit Book Page pulls data from the backend through HomeService, enabling users to modify existing book entries. Each component utilizes Angular's reactive forms and validation techniques to ensure a robust user experience. Conclusion
 
-Technology Stack Backend: .NET 8 with ASP.NET Core MVC and Entity Framework Core for data access. Authentication: ASP.NET Core Identity with JWT for secure user authentication. 
+Technology Stack Backend: .NET 8 with ASP.NET Core MVC and Entity Framework Core for data access. 
+Authentication: ASP.NET Core Identity with JWT for secure user authentication. 
 Database: Entity Framework Core for database interaction, leveraging a SQL database for storing user and book information.
