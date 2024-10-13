@@ -51,6 +51,7 @@ this.bookId = bookIdFromRoute.toUpperCase();
             title: book.title,
             author: book.author,
             isbn: book.isbn,
+            publisher: book.publisher,
             publishedYear: book.publishedYear,
             numberOfPages: book.numberOfPages,
             genre: book.genre,
