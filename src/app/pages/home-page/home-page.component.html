@@ -43,9 +43,6 @@
               <input type="text" id="isbn" class="w-full p-2 border-2 rounded-sm mt-2" formControlName="isbn">
               <!-- Validation Error for ISBN -->
               <div *ngIf="booksForm.get('isbn')?.touched && booksForm.get('isbn')?.invalid">
-                <div *ngIf="booksForm.get('isbn')?.errors?.['required']" class="text-red-500">
-                  ISBN is required.
-                </div>
               </div>
             </div>
 
