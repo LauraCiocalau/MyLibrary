@@ -7,13 +7,13 @@
             <img src="../../../public/img/default.jpg" alt="Default Book Image" class="book-image" />
         </ng-template>
         <br>
-        <p><strong>Author:</strong> {{ book.author || 'Not Available' }}</p>
-        <p><strong>Genre:</strong> {{ getGenre(book.genre) || 'Not Available' }}</p> 
-        <p><strong>ISBN:</strong> {{ book.isbn || 'Not Available' }}</p>
-        <p><strong>Publisher:</strong> {{ book.publisher || 'Not Available' }}</p>
-        <p><strong>Published year:</strong> {{ book.publishedYear || 'Not Available' }}</p>
-        <p><strong>Nr. of pages:</strong> {{ book.numberOfPages !== null ? book.numberOfPages : 'Not Available' }}</p>
-        <p><strong>Status:</strong> {{ getStatusString(book.status) || 'Not Available' }}</p>
+        <p><strong>Author:</strong> {{ book.author || '' }}</p>
+        <p><strong>Genre:</strong> {{ getGenre(book.genre) || '' }}</p> 
+        <p><strong>ISBN:</strong> {{ book.isbn || '' }}</p>
+        <p><strong>Publisher:</strong> {{ book.publisher || '' }}</p>
+        <p><strong>Published year:</strong> {{ book.publishedYear || '' }}</p>
+        <p><strong>Nr. of pages:</strong> {{ book.numberOfPages !== null ? book.numberOfPages : '' }}</p>
+        <p><strong>Status:</strong> {{ getStatusString(book.status) || '' }}</p>
         <div class="edit">
             <button (click)="edit()" class="add-btn px-2 py-2 rounded-sm w-full mb-2 buttons">
                 Edit
