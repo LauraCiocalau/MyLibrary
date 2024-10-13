@@ -67,6 +67,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       title: ['', Validators.required],
       author: ['', Validators.required],
       isbn: [''],
+      publisher : [''],
       publishedYear: [''],
       numberOfPages: [''],
       image: [''],

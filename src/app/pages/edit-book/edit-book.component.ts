@@ -30,6 +30,7 @@ export class EditBookComponent implements OnInit {
       title: ['', Validators.required],
       author: ['', Validators.required],
       isbn: [''],
+      publisher: [''],
       publishedYear: [''],
       numberOfPages: [''],
       image: [''],

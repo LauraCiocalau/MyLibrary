@@ -1,11 +1,12 @@
 export interface Book {
     id: string; // Poate fi UUID sau alt tip de identificator unic
     title: string;
+    author: string;
+    publisher: string;
     publishedYear: string; // Folosirea tipului Date oferă mai mult control asupra datelor de tip dată
     image: string; 
     genre: Genre;
     isbn: string;
-    author: string;
     numberOfPages: number; 
     status: Status;
 }
