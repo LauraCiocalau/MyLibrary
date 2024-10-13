@@ -10,6 +10,7 @@
         <p><strong>Author:</strong> {{ book.author || 'Not Available' }}</p>
         <p><strong>Genre:</strong> {{ getGenre(book.genre) || 'Not Available' }}</p> 
         <p><strong>ISBN:</strong> {{ book.isbn || 'Not Available' }}</p>
+        <p><strong>Publisher:</strong> {{ book.publisher || 'Not Available' }}</p>
         <p><strong>Published year:</strong> {{ book.publishedYear || 'Not Available' }}</p>
         <p><strong>Nr. of pages:</strong> {{ book.numberOfPages !== null ? book.numberOfPages : 'Not Available' }}</p>
         <p><strong>Status:</strong> {{ getStatusString(book.status) || 'Not Available' }}</p>
