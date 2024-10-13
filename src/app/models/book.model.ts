@@ -24,7 +24,8 @@ export enum Genre {
     Ebooks = 10,
     Philosophy = 11,
     Psychology = 12,
-    Audiobooks = 13
+    Audiobooks = 13,
+    InformationTechnology = 14
 }
 
 export enum Status {
