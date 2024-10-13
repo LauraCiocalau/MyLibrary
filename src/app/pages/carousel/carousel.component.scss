@@ -32,7 +32,7 @@
   font-family:Verdana, Geneva, Tahoma, sans-serif;
       @for $i from 1 to 4 {
         &:nth-child(#{$i}) {
-          background-color: black;
+          background-color: rgba(0, 0, 0, 0.8);
         }
       }
     }

@@ -8,6 +8,8 @@
 html{
   background-color: black;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 #container{
   position: relative;
   height: 100%;
@@ -68,6 +70,7 @@ margin-right: 20px;
   flex-wrap: wrap;
   background: #000;
 }
+
 .section::before {
   content: '';
   position: absolute;
@@ -117,5 +120,3 @@ position: relative;
   padding-top: 10px;
   margin-top: auto;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
