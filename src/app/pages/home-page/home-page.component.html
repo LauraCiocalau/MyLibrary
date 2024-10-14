@@ -43,6 +43,9 @@
               <input type="text" id="isbn" class="w-full p-2 border-2 rounded-sm mt-2" formControlName="isbn">
               <!-- Validation Error for ISBN -->
               <div *ngIf="booksForm.get('isbn')?.touched && booksForm.get('isbn')?.invalid">
+                <div *ngIf="booksForm.get('isbn')?.errors?.['pattern']" class="text-red-500">
+                  ISBN must be a 13-digit number.
+                </div>
               </div>
             </div>
 
