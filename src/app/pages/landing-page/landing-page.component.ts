@@ -39,10 +39,14 @@ export class LandingPageComponent implements AfterViewInit {
     });
   
     this.registerForm = this.fb.group({
+      userName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-      userName: ['', [Validators.required]]
+      password: ['', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).+$/)
+      ]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
     }, { validator: this.passwordsMatchValidator });
   }
 
@@ -72,10 +76,10 @@ export class LandingPageComponent implements AfterViewInit {
     this.registerSubmitted = true;
     if (this.registerForm.valid) {
         const registerModel: RegisterRequest = {
+          userName: this.registerForm.value.userName,
             email: this.registerForm.value.email,
             password: this.registerForm.value.password,
             confirmPassword: this.registerForm.value.confirmPassword,
-            userName: this.registerForm.value.userName
         };
   
         this.authService.register(registerModel).subscribe(
@@ -93,7 +97,9 @@ export class LandingPageComponent implements AfterViewInit {
                   if (error.error.errors.Password) {
                       this.errorMessage = error.error.errors.Password[0]; // Show specific password error
                   } else if (error.error.errors.Email) {
-                      this.errorMessage = error.error.errors.Email[0]; // Show specific email error
+                      this.errorMessage = error.error.errors.Email[0];
+                  } else if (error.error.errors.UserName) { // Added handling for UserName errors
+                        this.errorMessage = error.error.errors.UserName[0];
                   } else {
                       this.errorMessage = 'Registration failed. Please check your inputs and try again.';
                   }

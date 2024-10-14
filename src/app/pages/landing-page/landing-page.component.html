@@ -88,15 +88,16 @@
                     </div>
                 </div>
                 <div class="input-group">
-                    <input type="password" formControlName="password" class="form-style" placeholder="Your Password"
-                        autocomplete="off" />
+                    <input type="password" formControlName="password" class="form-style" placeholder="Your Password" autocomplete="off" />
                     <i class="input-icon uil uil-lock-alt"></i>
                     <div *ngIf="registerSubmitted && registerForm.get('password')?.invalid" class="error-message">
-                        <p *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</p>
-                        <p *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6
-                            characters long</p>
+                      <p *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</p>
+                      <p *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long</p>
+                      <p *ngIf="registerForm.get('password')?.errors?.['pattern']">
+                        Password must contain at least one uppercase letter, one special character, and one number
+                      </p>
                     </div>
-                </div>
+                  </div>
 
                 <div class="input-group">
                     <input type="password" formControlName="confirmPassword" class="form-style"
