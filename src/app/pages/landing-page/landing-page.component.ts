@@ -67,33 +67,43 @@ export class LandingPageComponent implements AfterViewInit {
       );
     }
   }
-
+  
   register(): void {
-  this.registerSubmitted = true;
-  if (this.registerForm.valid) {
-      const registerModel: RegisterRequest = {
-          email: this.registerForm.value.email,
-          password: this.registerForm.value.password,
-          confirmPassword: this.registerForm.value.confirmPassword,
-          userName: this.registerForm.value.userName
-      };
-
-      this.authService.register(registerModel).subscribe(
-        response => {
-            console.log('Registration successful', response);
-            this.successMessage = `Account created successfully!<br> You can log in now.`;
-            // Add a delay before navigating to home page to show the message
-            setTimeout(() => {
-                this.router.navigateByUrl('home-page');
-            }, 5000); // Adjust the delay time as needed
-        },
-        error => {
-            console.error('Registration error:', error);
-            this.errorMessage = error.error?.message || 'Registration failed. Please try again.';
-        }
-    );
+    this.registerSubmitted = true;
+    if (this.registerForm.valid) {
+        const registerModel: RegisterRequest = {
+            email: this.registerForm.value.email,
+            password: this.registerForm.value.password,
+            confirmPassword: this.registerForm.value.confirmPassword,
+            userName: this.registerForm.value.userName
+        };
+  
+        this.authService.register(registerModel).subscribe(
+          response => {
+              console.log('Registration successful', response);
+              this.successMessage = `Account created successfully!<br> You can log in now.`;
+              setTimeout(() => {
+                  this.router.navigateByUrl('home-page');
+              }, 5000);
+          },
+          error => {
+              console.error('Registration error:', error);
+              // Handle backend-specific validation errors
+              if (error.error && error.error.errors) {
+                  if (error.error.errors.Password) {
+                      this.errorMessage = error.error.errors.Password[0]; // Show specific password error
+                  } else if (error.error.errors.Email) {
+                      this.errorMessage = error.error.errors.Email[0]; // Show specific email error
+                  } else {
+                      this.errorMessage = 'Registration failed. Please check your inputs and try again.';
+                  }
+              } else {
+                  this.errorMessage = error.error?.message || 'Registration failed. Please try again.';
+              }
+          }
+      );
+    }
   }
-}
 
   passwordsMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;

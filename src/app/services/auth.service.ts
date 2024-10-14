@@ -82,23 +82,28 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-  // Error handling
   private handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'Something went wrong; please try again later.';
+    let errorMessage = 'An unexpected error occurred.';
     if (error.error instanceof ErrorEvent) {
-      console.error('A client-side error occurred:', error.error.message);
+      console.error('Client-side error:', error.error.message);
     } else {
-      console.error(`Backend returned code ${error.status}, body was: `, error.error);
+      console.error(`Backend error (status ${error.status}):`, error.error);
       switch (error.status) {
         case 400:
           errorMessage = 'Bad Request: Please check your input.';
           break;
         case 401:
           errorMessage = 'Unauthorized: Invalid credentials or session expired.';
-          this.clearToken(); // Clear token on 401
+          this.clearToken();
+          break;
+        case 403:
+          errorMessage = 'Forbidden: You do not have permission to perform this action.';
+          break;
+        case 404:
+          errorMessage = 'Not Found: The requested resource does not exist.';
           break;
         case 500:
-          errorMessage = 'Server error: Please try again later.';
+          errorMessage = 'Server Error: Please try again later.';
           break;
         default:
           errorMessage = `Unexpected error: ${error.message}`;
