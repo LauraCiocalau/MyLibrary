@@ -74,7 +74,7 @@
                 <div class="input-group">
                     <input type="text" formControlName="userName" placeholder="Username" required>
                     <i class="input-icon uil uil-at"></i>
-                    <div *ngIf="registerForm.get('userName')?.invalid && registerForm.get('userName')?.touched">
+                    <div *ngIf="registerForm.get('userName')?.invalid && registerForm.get('userName')?.touched" class="error-message">
                         <p *ngIf="registerForm.get('userName')?.errors?.['required']">Username is required.</p>
                     </div>
                 </div>
