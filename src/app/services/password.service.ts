@@ -7,7 +7,7 @@ import { MyResetPasswordRequest } from '../models/my-reset-password-request.mode
   providedIn: 'root',
 })
 export class PasswordService {
-  private apiUrl = 'https://mylibrary20240927025704.azurewebsites.net/api/ResetPassword'; // Ensure the endpoint matches your backend
+  private apiUrl = 'https://mylibrary.lauraciocalau.com/api/ResetPassword'; // Ensure the endpoint matches your backend
 
   constructor(private http: HttpClient) {}
 
