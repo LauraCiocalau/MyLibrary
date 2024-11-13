@@ -66,7 +66,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.booksForm = this.fb.group({
       title: ['', Validators.required],
       author: ['', Validators.required],
-      isbn: ['', Validators.pattern(/^\d{13}$/)],
+      isbn: ['', Validators.pattern(/^\d{1,5}-?\d{1,7}-?\d{1,7}-?\d{1,7}-?\d{1}$/)],
       publisher : [''],
       publishedYear: [''],
       numberOfPages: [''],

@@ -23,6 +23,11 @@
           <div class="mt-2 fields">
             <label for="isbn" class="font-bold text-white">ISBN</label>
             <input type="text" id="isbn" class="w-full p-2 border-2 rounded-sm mt-2" formControlName="isbn">
+            <div *ngIf="booksForm.get('isbn')?.touched && booksForm.get('isbn')?.invalid" class="text-red-500">
+              <div *ngIf="booksForm.get('isbn')?.errors?.['pattern']">
+                ISBN must be a valid 13-digit format, either as a continuous number or separated by hyphens.
+              </div>
+            </div>
           </div>
 
  <!-- Publisher Field -->

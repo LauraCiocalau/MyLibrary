@@ -44,7 +44,7 @@
               <!-- Validation Error for ISBN -->
               <div *ngIf="booksForm.get('isbn')?.touched && booksForm.get('isbn')?.invalid">
                 <div *ngIf="booksForm.get('isbn')?.errors?.['pattern']" class="text-red-500">
-                  ISBN must be a 13-digit number.
+                  ISBN must be a 13-digit number, with or without hyphens (e.g., 978-3-16-148410-0 or 9783161484100)
                 </div>
               </div>
             </div>
