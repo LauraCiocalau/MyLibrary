@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MyResetPasswordRequest } from '../models/my-reset-password-request.model'; // Ensure this path is correct
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PasswordService {
-  private apiUrl = 'https://mylibrary.lauraciocalau.com/api/ResetPassword'; // Ensure the endpoint matches your backend
-
+  private apiUrl = environment.apiUrl + '/ResetPassword';
+  
   constructor(private http: HttpClient) {}
 
   // Using MyResetPasswordRequest for type safety
