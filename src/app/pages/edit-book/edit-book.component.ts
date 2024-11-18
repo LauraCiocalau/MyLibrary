@@ -118,7 +118,7 @@ this.bookId = bookIdFromRoute.toUpperCase();
       },
       error: (err) => {
         console.error('Error:', err);
-        alert('An error occurred while submitting the form. Please try again later.');
+        alert("Please add the number of pages of the book if you haven't already done so.");
       }
     });
   }
